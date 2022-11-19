@@ -1,0 +1,58 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Segunda prueba Hibernate JPA</title>
+    </h:head>
+    <h:body>
+
+        <h:form id="formAlumno">
+
+            <p:panel>
+                <f:facet name="header">
+                    <p:outputLabel value="Datos de Alumno"></p:outputLabel>
+                </f:facet>
+                <p:panelGrid columns="2" layout="grid" columnClasses="p-col-4 p-md-3 p-xl-2, p-col-12 p-md-9 p-xl-4"
+                             styleClass="customPanelGrid" contentStyleClass="ui-fluid">
+                    <p:outputLabel for="txtNombres" value="Nombres"/>
+                    <p:inputText id="txtNombres" placeholder="Agrega nombre" style="width: 100%"
+                                 value="#{alumnoBackbean.nombre}"/>
+
+                    <p:outputLabel for="txtApellido" value="Apellidos"/>
+                    <p:inputText id="txtApellido" placeholder="Agrega apellido" style="width: 100%"
+                                 value="#{alumnoBackbean.apellido}"/>
+
+                    <p:outputLabel for="txtEdad" value="Edad"/>
+                    <p:spinner id="txtEdad" placeholder="Agrega edad" min="0" max="120" rotate="true"
+                               style="width: 100%" value="#{alumnoBackbean.edad}"/>
+                </p:panelGrid>
+
+                <p:outputPanel style="display: flex; gap: 5px;">
+                    <p:commandButton value="Agregar" style="margin: 5px 0px;"  actionListener="#{alumnoBackbean.agregar()}"/>
+                    <p:commandButton value="Mostrar" style="margin: 5px 0px;" update="formAlumno"
+                                     actionListener="#{alumnoBackbean.obtenerTodos()}"/>
+                </p:outputPanel>
+
+                <p:dataTable id="dtAlumno" var="al" paginator="true" pageLinks="3"
+                             paginatorPosition="top" rows="10"
+                             value="#{alumnoBackbean.alumnoList}">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{al.id}"/>
+                    </p:column>
+                    <p:column headerText="Nombres">
+                        <h:outputText value="#{al.nombres}"/>
+                    </p:column>
+                    <p:column headerText="Apellidos">
+                        <h:outputText value="#{al.apellidos}"/>
+                    </p:column>
+                    <p:column headerText="Edad">
+                        <h:outputText value="#{al.edad}"/>
+                    </p:column>
+                </p:dataTable>
+
+            </p:panel>
+        </h:form>
+
+    </h:body>
+</f:view>
